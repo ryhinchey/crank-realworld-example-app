@@ -3,22 +3,22 @@ import {createElement} from '@bikeshaving/crank';
 const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
-      <ul className="nav navbar-nav pull-xs-right">
+      <ul class="nav navbar-nav pull-xs-right">
 
-        <li className="nav-item">
-          <a href="/" className="nav-a">
+        <li class="nav-item">
+          <a href="/" class="nav-a">
             Home
           </a>
         </li>
 
-        <li className="nav-item">
-          <a href="/login" className="nav-a">
+        <li class="nav-item">
+          <a href="/login" class="nav-a">
             Sign in
           </a>
         </li>
 
-        <li className="nav-item">
-          <a href="/register" className="nav-a">
+        <li class="nav-item">
+          <a href="/register" class="nav-a">
             Sign up
           </a>
         </li>
@@ -32,31 +32,31 @@ const LoggedOutView = props => {
 const LoggedInView = props => {
   if (props.currentUser) {
     return (
-      <ul className="nav navbar-nav pull-xs-right">
+      <ul class="nav navbar-nav pull-xs-right">
 
-        <li className="nav-item">
-          <a href="/" className="nav-a">
+        <li class="nav-item">
+          <a href="/" class="nav-a">
             Home
           </a>
         </li>
 
-        <li className="nav-item">
-          <a href="/edihrefr" className="nav-a">
-            <i className="ion-compose"></i>&nbsp;New Post
+        <li class="nav-item">
+          <a href="/edihrefr" class="nav-a">
+            <i class="ion-compose"></i>&nbsp;New Post
           </a>
         </li>
 
-        <li className="nav-item">
-          <a href="/settings" className="nav-a">
-            <i className="ion-gear-a"></i>&nbsp;Settings
+        <li class="nav-item">
+          <a href="/settings" class="nav-a">
+            <i class="ion-gear-a"></i>&nbsp;Settings
           </a>
         </li>
 
-        <li className="nav-item">
+        <li class="nav-item">
           <a
             href={`/@${props.currentUser.username}`}
-            className="nav-a">
-            <img src={props.currentUser.image} className="user-pic" alt={props.currentUser.username} />
+            class="nav-a">
+            <img src={props.currentUser.image} class="user-pic" alt={props.currentUser.username} />
             {props.currentUser.username}
           </a>
         </li>
@@ -69,9 +69,9 @@ const LoggedInView = props => {
 };
 
 const Header = (props) => (
-  <nav className="navbar navbar-light">
-    <div className="container">
-      <a href="/" className="navbar-brand">Conduit</a>
+  <nav class="navbar navbar-light">
+    <div class="container">
+      <a href="/" class="navbar-brand">Conduit</a>
       <LoggedOutView currentUser={props.currentUser} />
       <LoggedInView currentUser={props.currentUser} />
     </div>

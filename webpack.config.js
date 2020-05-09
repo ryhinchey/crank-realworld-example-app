@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -23,7 +24,6 @@ module.exports = {
     compress: true,
     port: 9000,
     historyApiFallback: true,
-    publicPath: "/"
   },
   plugins: [
     new HtmlWebpackPlugin({
