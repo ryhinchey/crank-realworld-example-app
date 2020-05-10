@@ -41,7 +41,8 @@ const Tags = {
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
-const omitSlug = article => Object.assign({}, article, { slug: undefined })
+const omitSlug = article => Object.assign({}, article, { slug: undefined });
+
 const Articles = {
   all: page =>
     requests.get(`/articles?${limit(10, page)}`),
@@ -49,8 +50,8 @@ const Articles = {
     requests.get(`/articles?author=${encodeURIComponent(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>
     requests.get(`/articles?tag=${encodeURIComponent(tag)}&${limit(10, page)}`),
-  del: slug =>
-    requests.del(`/articles/${slug}`),
+  delete: slug =>
+    requests.delete(`/articles/${slug}`),
   favorite: slug =>
     requests.post(`/articles/${slug}/favorite`),
   favoritedBy: (author, page) =>
@@ -60,7 +61,7 @@ const Articles = {
   get: slug =>
     requests.get(`/articles/${slug}`),
   unfavorite: slug =>
-    requests.del(`/articles/${slug}/favorite`),
+    requests.delete(`/articles/${slug}/favorite`),
   update: article =>
     requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
   create: article =>
@@ -71,7 +72,7 @@ const Comments = {
   create: (slug, comment) =>
     requests.post(`/articles/${slug}/comments`, { comment }),
   delete: (slug, commentId) =>
-    requests.del(`/articles/${slug}/comments/${commentId}`),
+    requests.delete(`/articles/${slug}/comments/${commentId}`),
   forArticle: slug =>
     requests.get(`/articles/${slug}/comments`)
 };
@@ -82,7 +83,7 @@ const Profile = {
   get: username =>
     requests.get(`/profiles/${username}`),
   unfollow: username =>
-    requests.del(`/profiles/${username}/follow`)
+    requests.delete(`/profiles/${username}/follow`)
 };
 
 export default {

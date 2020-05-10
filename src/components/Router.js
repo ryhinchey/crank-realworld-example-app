@@ -42,7 +42,7 @@ export function Route({children, path}) {
   }
 
   const paramsMatcher = match(path);
-  const params = paramsMatcher(pathname);
-  this.set('route', {pathname, params: params });
+  const {params} = paramsMatcher(pathname);
+  this.set('route', {pathname, params });
   return children;
 }
