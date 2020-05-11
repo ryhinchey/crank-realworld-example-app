@@ -29,7 +29,7 @@ const TagFilterTab = props => {
 };
 
 
-const MainView = ({articles}) => {
+const MainView = () => {
   return (
     <div class="col-md-9">
       <div class="feed-toggle">
@@ -39,7 +39,7 @@ const MainView = ({articles}) => {
         </ul>
       </div>
 
-      <ArticleList articles={articles}/>
+      <ArticleList />
     </div>
   );
 };

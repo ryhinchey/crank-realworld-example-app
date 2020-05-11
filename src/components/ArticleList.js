@@ -1,23 +1,24 @@
 import { createElement } from '@bikeshaving/crank';
 import ArticlePreview from './ArticlePreview';
+import api from '../api';
 
-const ArticleList = ({articles}) => {
-  if (!articles) {
-    return (
-      <div class="article-preview">Loading...</div>
-    );
-  }
+async function *ArticleList() {
 
-  if (articles.length === 0) {
-    return (
-      <div class="article-preview">
-        No articles are here... yet.
-      </div>
-    );
-  }
+  for await (const _ of this) {
+    yield <div class="article-preview">Loading...</div>;
+    
+    const { articles } = await api.Articles.all();
 
-  return (
-    <div>
+    if (articles.length === 0) {
+      return (
+        <div class="article-preview">
+          No articles are here... yet.
+        </div>
+      );
+    }
+    
+    yield (
+      <div>
       {
         articles.map(article => {
           return (
@@ -26,7 +27,8 @@ const ArticleList = ({articles}) => {
         })
       }
     </div>
-  );
+    )
+  }
 };
 
 export default ArticleList;
