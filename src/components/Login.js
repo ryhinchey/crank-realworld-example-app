@@ -18,7 +18,6 @@ function* Login() {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(email, password)
   }
 
   while (true) {

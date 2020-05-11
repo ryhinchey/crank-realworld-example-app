@@ -2,7 +2,7 @@ import { createElement } from '@bikeshaving/crank';
 import ArticleList from '../ArticleList';
 import Suspense from '../Suspense';
 
-const GlobalFeedTab = props => {
+function GlobalFeedTab(props) {
   return (
     <li class="nav-item">
       <a
@@ -15,7 +15,7 @@ const GlobalFeedTab = props => {
   );
 };
 
-const TagFilterTab = props => {
+function TagFilterTab(props) {
   if (!props.tag) {
     return null;
   }
@@ -29,7 +29,7 @@ const TagFilterTab = props => {
   );
 };
 
-const MainView = () => {
+function MainView(props) {
   return (
     <div class="col-md-9">
       <div class="feed-toggle">

@@ -1,6 +1,6 @@
 import { createElement } from '@bikeshaving/crank';
 
-const Banner = ({ token }) => {
+function Banner({ token }) {
   if (token) {
     return null;
   }

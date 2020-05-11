@@ -1,40 +1,45 @@
-import {createElement} from "@bikeshaving/crank";
-import { createBrowserHistory } from 'history';
+import {createElement, Context} from "@bikeshaving/crank";
 import { pathToRegexp, match } from "path-to-regexp";
 
+export const RouterSymbol = Symbol();
+const routeChangeEvent = 'crankroutechangeevent';
 
-const history = createBrowserHistory();
-export const RouterContext = Symbol('crank-router-context');
+const context = new Context();
+
+export function routeTo(href) {
+  context.dispatchEvent(new CustomEvent(routeChangeEvent, {bubbles: true, detail: { href }}));
+}
 
 export function Link({href, children, ...props}) {
   const onclick = (e) => {
     e.preventDefault();
-    history.push(href);
+    routeTo(href);
   };
 
   return <a onclick={onclick} href={href} {...props}>{children}</a>
 }
 
 export function *Router({children}) {
-  this.set(RouterContext, {pathname: history.location.pathname});
-  let unlisten;
+  this.set(RouterSymbol, {pathname: document.location.pathname});
 
-  try {
-    unlisten = history.listen((location) => {
-      this.set(RouterContext, {pathname: location.pathname});
-      this.refresh();
-    });
+  window.addEventListener('popstate', e => {
+    this.set(RouterSymbol, {pathname: document.location.pathname});
+    this.refresh(); 
+  })
+  
+  context.addEventListener(routeChangeEvent, e => {
+    history.pushState(null, null, e.detail.href);
+    this.set(RouterSymbol, {pathname: e.detail.href});
+    this.refresh();
+  });
 
-    while(true) {
-      yield children; 
-    }
-  } finally {
-    unlisten();
+  while(true) {
+    yield children; 
   }
 }
 
 export function Route({children, path}) {
-  const pathname = this.get(RouterContext).pathname;
+  const pathname = this.get(RouterSymbol).pathname;
   const pathRegex = pathToRegexp(path);
   const shouldRender = pathRegex.exec(pathname);
 
@@ -44,6 +49,6 @@ export function Route({children, path}) {
 
   const paramsMatcher = match(path);
   const {params} = paramsMatcher(pathname);
-  this.set(RouterContext, {pathname, params });
+  this.set(RouterSymbol, {pathname, params });
   return children;
 }

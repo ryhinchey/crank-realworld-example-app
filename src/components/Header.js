@@ -1,7 +1,8 @@
 import {createElement} from '@bikeshaving/crank';
+import { RouterSymbol, Router } from './Router';
 import { Link } from './Router';
 
-const LoggedOutView = props => {
+function LoggedOutView(props) {
   if (!props.currentUser) {
     return (
       <ul class="nav navbar-nav pull-xs-right">
@@ -30,7 +31,7 @@ const LoggedOutView = props => {
   return null;
 };
 
-const LoggedInView = props => {
+function LoggedInView(props) {
   if (props.currentUser) {
     return (
       <ul class="nav navbar-nav pull-xs-right">
@@ -69,14 +70,16 @@ const LoggedInView = props => {
   return null;
 };
 
-const Header = (props) => (
-  <nav class="navbar navbar-light">
-    <div class="container">
-      <Link href="/" class="navbar-brand">Conduit</Link>
-      <LoggedOutView currentUser={props.currentUser} />
-      <LoggedInView currentUser={props.currentUser} />
-    </div>
-  </nav>
-);
+function Header(props) {
+  return (
+    <nav class="navbar navbar-light">
+      <div class="container">
+        <Link href="/" class="navbar-brand">Conduit</Link>
+        <LoggedOutView currentUser={props.currentUser} />
+        <LoggedInView currentUser={props.currentUser} />
+      </div>
+    </nav>
+  );
+}
 
 export default Header;

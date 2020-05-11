@@ -8,8 +8,8 @@ import Login from './Login';
 function App() {
   return (
     <Fragment>
-      <Header />
       <Router>
+        <Header />
         <Route path="/"><Home/></Route>
         <Route path="/login"><Login/></Route>
         <Route path="/article/:id"><Article/></Route>

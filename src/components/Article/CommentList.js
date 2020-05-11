@@ -1,7 +1,7 @@
 import Comment from './Comment';
 import React from 'react';
 
-const CommentList = props => {
+function CommentList(props) {
   return (
     <div>
       {

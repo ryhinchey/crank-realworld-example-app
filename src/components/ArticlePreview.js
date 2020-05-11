@@ -4,7 +4,7 @@ import { Link } from './Router';
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
 const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
 
-const ArticlePreview = ({article}) => {
+function ArticlePreview({article}) {
   const favoriteButtonClass = article.favorited ?
     FAVORITED_CLASS :
     NOT_FAVORITED_CLASS;

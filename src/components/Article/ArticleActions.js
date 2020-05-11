@@ -3,7 +3,7 @@ import { Link } from '../Router';
 import api from '../../api';
 
 
-const ArticleActions = props => {
+function ArticleActions(props) {
   const article = props.article;
   const del = () => {
     api.Articles.delete(article.slug)

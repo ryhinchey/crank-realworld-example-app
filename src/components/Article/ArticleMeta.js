@@ -2,7 +2,7 @@ import { createElement } from '@bikeshaving/crank';
 import ArticleActions from './ArticleActions';
 import { Link } from '../Router';
 
-const ArticleMeta = ({article, canModify}) => {
+function ArticleMeta({article, canModify}) {
   return (
     <div class="article-meta">
       <Link href={`/@${article.author.username}`}>
