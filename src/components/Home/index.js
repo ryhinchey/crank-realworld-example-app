@@ -1,6 +1,7 @@
 import { createElement } from '@bikeshaving/crank';
 import Banner from './Banner';
 import MainView from './MainView';
+import Tags from './Tags';
 
 function Home() {  
   return (
@@ -12,9 +13,7 @@ function Home() {
           <div class="col-md-3">
             <div class="sidebar">
               <p>Popular Tags</p>
-              {/* <Tags
-              tags={this.props.tags}
-              onClickTag={this.props.onClickTag} /> */}
+              <Tags />
             </div>
           </div>
         </div>

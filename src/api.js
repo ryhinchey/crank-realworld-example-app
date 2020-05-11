@@ -37,7 +37,7 @@ const Auth = {
 };
 
 const Tags = {
-  getAll: () => requests.get('/tags')
+  all: () => requests.get('/tags')
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
