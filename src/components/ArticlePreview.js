@@ -12,12 +12,12 @@ const ArticlePreview = ({article}) => {
   return (
     <div class="article-preview">
       <div class="article-meta">
-        <Link to={`/@${article.author.username}`}>
+        <Link href={`/@${article.author.username}`}>
           <img src={article.author.image} alt={article.author.username} />
         </Link>
 
         <div class="info">
-          <Link class="author" to={`/@${article.author.username}`}>
+          <Link class="author" href={`/@${article.author.username}`}>
             {article.author.username}
           </Link>
           <span class="date">
@@ -32,7 +32,7 @@ const ArticlePreview = ({article}) => {
         </div>
       </div>
 
-      <Link to={`/article/${article.slug}`} class="preview-link">
+      <Link href={`/article/${article.slug}`} class="preview-link">
         <h1>{article.title}</h1>
         <p>{article.description}</p>
         <span>Read more...</span>

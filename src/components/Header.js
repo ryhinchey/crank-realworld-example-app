@@ -1,4 +1,5 @@
 import {createElement} from '@bikeshaving/crank';
+import { Link } from './Router';
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
@@ -6,21 +7,21 @@ const LoggedOutView = props => {
       <ul class="nav navbar-nav pull-xs-right">
 
         <li class="nav-item">
-          <a href="/" class="nav-a">
+          <Link href="/" class="nav-a">
             Home
-          </a>
+          </Link>
         </li>
 
         <li class="nav-item">
-          <a href="/login" class="nav-a">
+          <Link href="/login" class="nav-a">
             Sign in
-          </a>
+          </Link>
         </li>
 
         <li class="nav-item">
-          <a href="/register" class="nav-a">
+          <Link href="/register" class="nav-a">
             Sign up
-          </a>
+          </Link>
         </li>
 
       </ul>
@@ -35,30 +36,30 @@ const LoggedInView = props => {
       <ul class="nav navbar-nav pull-xs-right">
 
         <li class="nav-item">
-          <a href="/" class="nav-a">
+          <Link href="/" class="nav-a">
             Home
-          </a>
+          </Link>
         </li>
 
         <li class="nav-item">
-          <a href="/edihrefr" class="nav-a">
+          <Link href="/edihrefr" class="nav-a">
             <i class="ion-compose"></i>&nbsp;New Post
-          </a>
+          </Link>
         </li>
 
         <li class="nav-item">
-          <a href="/settings" class="nav-a">
+          <Link href="/settings" class="nav-a">
             <i class="ion-gear-a"></i>&nbsp;Settings
-          </a>
+          </Link>
         </li>
 
         <li class="nav-item">
-          <a
+          <Link
             href={`/@${props.currentUser.username}`}
             class="nav-a">
             <img src={props.currentUser.image} class="user-pic" alt={props.currentUser.username} />
             {props.currentUser.username}
-          </a>
+          </Link>
         </li>
 
       </ul>
@@ -71,7 +72,7 @@ const LoggedInView = props => {
 const Header = (props) => (
   <nav class="navbar navbar-light">
     <div class="container">
-      <a href="/" class="navbar-brand">Conduit</a>
+      <Link href="/" class="navbar-brand">Conduit</Link>
       <LoggedOutView currentUser={props.currentUser} />
       <LoggedInView currentUser={props.currentUser} />
     </div>

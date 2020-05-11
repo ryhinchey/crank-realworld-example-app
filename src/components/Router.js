@@ -5,13 +5,13 @@ import { pathToRegexp, match } from "path-to-regexp";
 
 const history = createBrowserHistory();
 
-export function Link({to, children, ...props}) {
+export function Link({href, children, ...props}) {
   const onclick = (e) => {
     e.preventDefault();
-    history.push(to);
+    history.push(href);
   };
 
-  return <a onclick={onclick} href={to} {...props}>{children}</a>
+  return <a onclick={onclick} href={href} {...props}>{children}</a>
 }
 
 export function *Router({children}) {

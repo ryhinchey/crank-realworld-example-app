@@ -14,7 +14,7 @@ const ArticleActions = props => {
       <span>
 
         <Link
-          to={`/editor/${article.slug}`}
+          href={`/editor/${article.slug}`}
           class="btn btn-outline-secondary btn-sm">
           <i class="ion-edit"></i> Edit Article
         </Link>

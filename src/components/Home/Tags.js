@@ -6,7 +6,7 @@ async function *Tags() {
     yield <div>Loading Tags...</div>;
     const { tags } = await api.Tags.all();
     yield (
-      <div className="tag-list">
+      <div class="tag-list">
         {tags.map(tag => (
           <button class="tag-default tag-pill" key={tag}>
             {tag}

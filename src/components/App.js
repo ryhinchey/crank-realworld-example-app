@@ -3,6 +3,7 @@ import { Router, Link, Route } from './Router';
 import Header from './Header';
 import Home from './Home';
 import Article from './Article';
+import Login from './Login';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Header />
       <Router>
         <Route path="/"><Home/></Route>
+        <Route path="/login"><Login/></Route>
         <Route path="/article/:id"><Article/></Route>
       </Router>
     </Fragment>
