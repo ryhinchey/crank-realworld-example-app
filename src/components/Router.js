@@ -4,6 +4,7 @@ import { pathToRegexp, match } from "path-to-regexp";
 
 
 const history = createBrowserHistory();
+export const RouterContext = Symbol('crank-router-context');
 
 export function Link({href, children, ...props}) {
   const onclick = (e) => {
@@ -15,12 +16,12 @@ export function Link({href, children, ...props}) {
 }
 
 export function *Router({children}) {
-  this.set('route', {pathname: history.location.pathname});
+  this.set(RouterContext, {pathname: history.location.pathname});
   let unlisten;
 
   try {
     unlisten = history.listen((location) => {
-      this.set('route', {pathname: location.pathname});
+      this.set(RouterContext, {pathname: location.pathname});
       this.refresh();
     });
 
@@ -33,7 +34,7 @@ export function *Router({children}) {
 }
 
 export function Route({children, path}) {
-  const pathname = this.get('route').pathname;
+  const pathname = this.get(RouterContext).pathname;
   const pathRegex = pathToRegexp(path);
   const shouldRender = pathRegex.exec(pathname);
 
@@ -43,6 +44,6 @@ export function Route({children, path}) {
 
   const paramsMatcher = match(path);
   const {params} = paramsMatcher(pathname);
-  this.set('route', {pathname, params });
+  this.set(RouterContext, {pathname, params });
   return children;
 }

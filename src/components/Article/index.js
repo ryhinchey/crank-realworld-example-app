@@ -1,13 +1,14 @@
 
 import { createElement, Raw } from '@bikeshaving/crank';
 import ArticleMeta from './ArticleMeta';
+import { RouterContext } from '../Router';
 // import CommentContainer from './CommentContainer';
 import api from '../../api';
 import marked from 'marked';
 
 
 async function Article() {
-  const route = this.get('route');
+  const route = this.get(RouterContext);
   const currentUser = this.get('currenUser');
   const {article} = await api.Articles.get(route.params.id);
   // const comments = await api.Comments.forArticle(route.params.id);
