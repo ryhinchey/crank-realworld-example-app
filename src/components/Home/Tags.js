@@ -1,20 +1,21 @@
 import { createElement } from '@bikeshaving/crank';
 import api from '../../api';
 
-async function *Tags() {
-  for await (const _ of this) {
-    yield <div>Loading Tags...</div>;
-    const { tags } = await api.Tags.all();
-    yield (
-      <div class="tag-list">
-        {tags.map(tag => (
-          <button class="tag-default tag-pill" key={tag}>
-            {tag}
-          </button>
-        ))}
-      </div>
-    );
-  }
-};
+function Tag({tag}) {
+  return (
+    <button class="tag-default tag-pill" key={tag}>
+      {tag}
+    </button>
+  )
+}
+
+async function Tags() {
+  const { tags } = await api.Tags.all();
+  return (
+    <div class="tag-list">
+      {tags.map(tag => <Tag tag={tag} />)}
+    </div>
+  );
+}
 
 export default Tags;

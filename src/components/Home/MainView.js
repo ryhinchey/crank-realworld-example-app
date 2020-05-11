@@ -1,5 +1,6 @@
 import { createElement } from '@bikeshaving/crank';
 import ArticleList from '../ArticleList';
+import Suspense from '../Suspense';
 
 const GlobalFeedTab = props => {
   return (
@@ -28,7 +29,6 @@ const TagFilterTab = props => {
   );
 };
 
-
 const MainView = () => {
   return (
     <div class="col-md-9">
@@ -38,8 +38,9 @@ const MainView = () => {
           <TagFilterTab />
         </ul>
       </div>
-
-      <ArticleList />
+      <Suspense fallback={<div class="article-preview">Loading...</div>} timeout={200}>
+        <ArticleList />
+      </Suspense>
     </div>
   );
 };
