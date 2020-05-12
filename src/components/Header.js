@@ -1,18 +1,10 @@
-import {createElement} from '@bikeshaving/crank';
-import { RouterSymbol, Router } from './Router';
+import { createElement, Fragment } from '@bikeshaving/crank';
 import { Link } from './Router';
 
-function LoggedOutView(props) {
-  if (!props.currentUser) {
+function LoggedOutView({ currentUser }) {
+  if (!currentUser) {
     return (
-      <ul class="nav navbar-nav pull-xs-right">
-
-        <li class="nav-item">
-          <Link href="/" class="nav-a">
-            Home
-          </Link>
-        </li>
-
+      <Fragment>
         <li class="nav-item">
           <Link href="/login" class="nav-a">
             Sign in
@@ -24,24 +16,16 @@ function LoggedOutView(props) {
             Sign up
           </Link>
         </li>
-
-      </ul>
+      </Fragment>
     );
   }
   return null;
 };
 
-function LoggedInView(props) {
-  if (props.currentUser) {
+function LoggedInView({ currentUser }) {
+  if (currentUser) {
     return (
-      <ul class="nav navbar-nav pull-xs-right">
-
-        <li class="nav-item">
-          <Link href="/" class="nav-a">
-            Home
-          </Link>
-        </li>
-
+      <Fragment>
         <li class="nav-item">
           <Link href="/editor" class="nav-a">
             <i class="ion-compose"></i>&nbsp;New Post
@@ -56,16 +40,14 @@ function LoggedInView(props) {
 
         <li class="nav-item">
           <Link
-            href={`/@${props.currentUser.username}`}
+            href={`/@${currentUser.username}`}
             class="nav-a">
-            {props.currentUser.username}
+            {currentUser.username}
           </Link>
         </li>
-
-      </ul>
+      </Fragment>
     );
   }
-
   return null;
 };
 
@@ -75,8 +57,15 @@ function Header() {
     <nav class="navbar navbar-light">
       <div class="container">
         <Link href="/" class="navbar-brand">Conduit</Link>
-        <LoggedOutView currentUser={currentUser} />
-        <LoggedInView currentUser={currentUser} />
+        <ul class="nav navbar-nav pull-xs-right">
+          <li class="nav-item">
+            <Link href="/" class="nav-a">
+              Home
+            </Link>
+          </li>
+          <LoggedOutView currentUser={currentUser} />
+          <LoggedInView currentUser={currentUser} />
+        </ul>
       </div>
     </nav>
   );

@@ -5,12 +5,11 @@ import Suspense from '../Suspense';
 function GlobalFeedTab(props) {
   return (
     <li class="nav-item">
-      <a
-        href=""
+      <button
         class={ props.tab === 'all' ? 'nav-link active' : 'nav-link' }
       >
         Global Feed
-      </a>
+      </button>
     </li>
   );
 };
@@ -22,18 +21,34 @@ function TagFilterTab(props) {
 
   return (
     <li class="nav-item">
-      <a href="" class="nav-link active">
+      <button class="nav-link active">
         <i class="ion-pound"></i> {props.tag}
-      </a>
+      </button>
     </li>
   );
 };
 
+function YourFeedTab({currentUser, activeTab}) {
+  if (currentUser) {
+    return (
+      <li class="nav-item">
+        <button class={ activeTab === 'feed' ? 'nav-link active' : 'nav-link' }>          
+          Your Feed
+        </button>
+      </li>
+    );
+  }
+  return null;
+};
+
 function MainView(props) {
+  const currentUser = this.get('currentUser');
+
   return (
     <div class="col-md-9">
       <div class="feed-toggle">
         <ul class="nav nav-pills outline-active">
+          <YourFeedTab currentUser={currentUser} />
           <GlobalFeedTab />
           <TagFilterTab />
         </ul>
