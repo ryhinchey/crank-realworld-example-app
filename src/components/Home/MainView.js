@@ -1,4 +1,5 @@
 import { createElement } from '@bikeshaving/crank';
+import { RouteData } from '../Router';
 import ArticleList from '../ArticleList';
 import Suspense from '../Suspense';
 
@@ -43,7 +44,6 @@ function YourFeedTab({currentUser, activeTab}) {
 
 function MainView(props) {
   const currentUser = this.get('currentUser');
-
   return (
     <div class="col-md-9">
       <div class="feed-toggle">

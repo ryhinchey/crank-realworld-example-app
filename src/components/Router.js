@@ -1,56 +1,83 @@
-import {createElement, Context} from "@bikeshaving/crank";
+import { createElement, Context } from "@bikeshaving/crank";
 import { pathToRegexp, match } from "path-to-regexp";
 
-export const RouterSymbol = Symbol();
-const routeChangeEvent = 'crankroutechangeevent';
+export const RouteData = Symbol();
+const routeChangeEvent = 'crankroutechange';
 
 const context = new Context();
 
 export function routeTo(href) {
-  context.dispatchEvent(new CustomEvent(routeChangeEvent, {bubbles: true, detail: { href }}));
+  context.dispatchEvent(new CustomEvent(routeChangeEvent, { bubbles: true, detail: { href } }));
 }
 
-export function Link({href, children, class: className, ...props}) {
+export function Link({ href, children, class: className, ...props }) {
   const onclick = (e) => {
     e.preventDefault();
     routeTo(href);
   };
 
-  const activePath = this.get(RouterSymbol).pathname;
-  const activeClass = activePath === href ? 'active': '';
+  const activePath = this.get(RouteData).pathname;
+  const activeClass = activePath === href ? 'active' : '';
   return <a class={`${className} ${activeClass}`} onclick={onclick} href={href} {...props}>{children}</a>
 }
 
-export function *Router({children}) {
-  this.set(RouterSymbol, {pathname: document.location.pathname});
+export function* Router() {
+  let pathname = document.location.pathname;
 
   window.addEventListener('popstate', e => {
-    this.set(RouterSymbol, {pathname: document.location.pathname});
-    this.refresh(); 
+    pathname = document.location.pathname;
+    this.refresh();
   })
- 
+
   context.addEventListener(routeChangeEvent, e => {
     history.pushState(null, null, e.detail.href);
-    this.set(RouterSymbol, {pathname: e.detail.href});
+    pathname = e.detail.href;
     this.refresh();
   });
- 
-  while(true) {
+
+  for (let { children } of this) {
+    if (!children) {
+      yield null;
+    }
+   
+    if (!Array.isArray(children)) children = [children];
+    
+    this.set(RouteData, { pathname });
+    this.set('routerMatch', false);
+    
+    for (let child of children) {
+      if (child.tag && child.tag.name === 'Route' && !child.props.default) {
+        const pathRegex = pathToRegexp(child.props.path);
+        const shouldRender = pathRegex.exec(pathname);
+        if (shouldRender) {
+          this.set('routerMatch', true);
+          break;
+        }
+      }
+    }
     yield children;
   }
 }
 
-export function Route({children, path}) {
-  const pathname = this.get(RouterSymbol).pathname;
+export function Route({ children, path = '', ...props }) {
+  const routeData = this.get(RouteData);
+  const pathname = routeData.pathname;
   const pathRegex = pathToRegexp(path);
   const shouldRender = pathRegex.exec(pathname);
 
-  if (!shouldRender) {
+  const paramsMatcher = match(path);
+  const { params } = paramsMatcher(pathname);
+  this.set(RouteData, { ...routeData, params });
+
+  const routerMatch = this.get('routerMatch');
+
+  if (props.default && !routerMatch) {
+    return children;
+  }
+
+  if (!shouldRender || props.default) {
     return null;
   }
 
-  const paramsMatcher = match(path);
-  const {params} = paramsMatcher(pathname);
-  this.set(RouterSymbol, {pathname, params });
   return children;
 }
