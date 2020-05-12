@@ -10,13 +10,15 @@ export function routeTo(href) {
   context.dispatchEvent(new CustomEvent(routeChangeEvent, {bubbles: true, detail: { href }}));
 }
 
-export function Link({href, children, ...props}) {
+export function Link({href, children, class: className, ...props}) {
   const onclick = (e) => {
     e.preventDefault();
     routeTo(href);
   };
 
-  return <a onclick={onclick} href={href} {...props}>{children}</a>
+  const activePath = this.get(RouterSymbol).pathname;
+  const activeClass = activePath === href ? 'active': '';
+  return <a class={`${className} ${activeClass}`} onclick={onclick} href={href} {...props}>{children}</a>
 }
 
 export function *Router({children}) {
@@ -26,15 +28,15 @@ export function *Router({children}) {
     this.set(RouterSymbol, {pathname: document.location.pathname});
     this.refresh(); 
   })
-  
+ 
   context.addEventListener(routeChangeEvent, e => {
     history.pushState(null, null, e.detail.href);
     this.set(RouterSymbol, {pathname: e.detail.href});
     this.refresh();
   });
-
+ 
   while(true) {
-    yield children; 
+    yield children;
   }
 }
 
