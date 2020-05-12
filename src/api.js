@@ -1,7 +1,10 @@
+import { getAuthToken } from './local-storage';
+
 const API_ROOT = 'https://conduit.productionready.io/api';
 
-let token;
-const getHeaders = (headers = {}) => {
+const getHeaders = (headers = {'Content-Type': 'application/json'}) => {
+  const token = getAuthToken();
+  
   if (token) {
     return {
       ...headers,
@@ -91,6 +94,5 @@ export default {
   Auth,
   Comments,
   Profile,
-  Tags,
-  setToken: _token => { token = token }
+  Tags
 };

@@ -43,7 +43,7 @@ function LoggedInView(props) {
         </li>
 
         <li class="nav-item">
-          <Link href="/edihrefr" class="nav-a">
+          <Link href="/editor" class="nav-a">
             <i class="ion-compose"></i>&nbsp;New Post
           </Link>
         </li>
@@ -58,7 +58,6 @@ function LoggedInView(props) {
           <Link
             href={`/@${props.currentUser.username}`}
             class="nav-a">
-            <img src={props.currentUser.image} class="user-pic" alt={props.currentUser.username} />
             {props.currentUser.username}
           </Link>
         </li>
@@ -70,13 +69,14 @@ function LoggedInView(props) {
   return null;
 };
 
-function Header(props) {
+function Header() {
+  const currentUser = this.get('currentUser');
   return (
     <nav class="navbar navbar-light">
       <div class="container">
         <Link href="/" class="navbar-brand">Conduit</Link>
-        <LoggedOutView currentUser={props.currentUser} />
-        <LoggedInView currentUser={props.currentUser} />
+        <LoggedOutView currentUser={currentUser} />
+        <LoggedInView currentUser={currentUser} />
       </div>
     </nav>
   );
