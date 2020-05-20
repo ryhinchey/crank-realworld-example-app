@@ -46,7 +46,7 @@ export function* Router() {
     this.set('routerMatch', false);
     
     for (let child of children) {
-      if (child.tag && child.tag.name === 'Route' && !child.props.default) {
+      if (child.tag && child.tag === Route && !child.props.default) {
         const pathRegex = pathToRegexp(child.props.path);
         const shouldRender = pathRegex.exec(pathname);
         if (shouldRender) {
