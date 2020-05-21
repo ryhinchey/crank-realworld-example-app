@@ -10,7 +10,6 @@ import marked from 'marked';
 async function Article() {
   const route = this.get(RouteData);
   const currentUser = this.get('currenUser');
-  console.log(route)
   const {article} = await api.Articles.get(route.params.id);
   // const comments = await api.Comments.forArticle(route.params.id);
 
