@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/ryhinchey/realworld-starter-kit#readme",
   "dependencies": {
-    "@bikeshaving/crank": "^0.1.3",
+    "@bikeshaving/crank": "^0.1.4",
     "marked": "^1.0.0",
     "path-to-regexp": "^6.1.0"
   },
