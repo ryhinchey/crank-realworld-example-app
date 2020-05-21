@@ -7,6 +7,7 @@ import Login from './Login';
 import Register from './Register';
 import api from '../api';
 import { Link } from './Router';
+import Suspense from './Suspense';
 import { setAuthToken, getAuthToken } from '../local-storage';
 
 function NotFound() {
@@ -42,7 +43,9 @@ async function *App() {
         <Route path="/"><Home/></Route>
         <Route path="/login"><Login/></Route>
         <Route path="/register"><Register/></Route>
-        <Route path="/article/:id"><Article/></Route>
+        <Route path="/article/:id">
+          <Suspense><Article/></Suspense>
+        </Route>
         <Route default>
           <NotFound/>
         </Route>
