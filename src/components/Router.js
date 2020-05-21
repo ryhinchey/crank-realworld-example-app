@@ -61,15 +61,10 @@ export function* Router() {
 
 export function Route({ children, path = '', ...props }) {
   const routeData = this.get(RouteData);
+  const routerMatch = this.get('routerMatch');
   const pathname = routeData.pathname;
   const pathRegex = pathToRegexp(path);
   const shouldRender = pathRegex.exec(pathname);
-
-  const paramsMatcher = match(path);
-  const { params } = paramsMatcher(pathname);
-  this.set(RouteData, { ...routeData, params });
-
-  const routerMatch = this.get('routerMatch');
 
   if (props.default && !routerMatch) {
     return children;
@@ -78,6 +73,10 @@ export function Route({ children, path = '', ...props }) {
   if (!shouldRender || props.default) {
     return null;
   }
+
+  const paramsMatcher = match(path);
+  const { params } = paramsMatcher(pathname);
+  this.set(RouteData, { ...routeData, params });
 
   return children;
 }
