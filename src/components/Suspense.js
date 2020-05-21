@@ -1,6 +1,6 @@
 import { createElement } from '@bikeshaving/crank';
 
-async function Fallback({timeout = 1000, children}) {
+async function Fallback({timeout = 0, children}) {
   await new Promise((resolve) => setTimeout(resolve, timeout));
   return children;
 }
