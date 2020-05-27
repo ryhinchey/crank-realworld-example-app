@@ -1,10 +1,10 @@
-import { createElement, Context } from "@bikeshaving/crank";
+import { createElement } from "@bikeshaving/crank";
 import { pathToRegexp, match } from "path-to-regexp";
 
 export const RouteData = Symbol();
 const routeChangeEvent = 'crankroutechange';
 
-const context = new Context();
+const context = new EventTarget();
 
 export function routeTo(href) {
   context.dispatchEvent(new CustomEvent(routeChangeEvent, { bubbles: true, detail: { href } }));
