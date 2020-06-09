@@ -1,9 +1,8 @@
-import { createElement } from '@bikeshaving/crank';
 import api from '../../api';
 
 function *CommentInput({slug}) {
   let body = '';
-  
+
   const setBody = ev => {
     body = ev.target.value;
     this.refresh();

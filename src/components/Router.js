@@ -1,4 +1,3 @@
-import { createElement } from "@bikeshaving/crank";
 import { pathToRegexp, match } from "path-to-regexp";
 
 export const RouteData = Symbol();
@@ -39,12 +38,12 @@ export function* Router() {
     if (!children) {
       yield null;
     }
-   
+
     if (!Array.isArray(children)) children = [children];
-    
+
     this.set(RouteData, { pathname });
     this.set('routerMatch', false);
-    
+
     for (let child of children) {
       if (child.tag && child.tag === Route && !child.props.default) {
         const pathRegex = pathToRegexp(child.props.path);

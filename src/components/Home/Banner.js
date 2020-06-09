@@ -1,5 +1,3 @@
-import { createElement } from '@bikeshaving/crank';
-
 function Banner({ token }) {
   if (token) {
     return null;

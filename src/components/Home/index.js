@@ -1,10 +1,9 @@
-import { createElement } from '@bikeshaving/crank';
 import Banner from './Banner';
 import MainView from './MainView';
 import Tags from './Tags';
 import Suspense from '../Suspense';
 
-function Home() {  
+function Home() {
   return (
     <div class="home-page">
       <Banner />

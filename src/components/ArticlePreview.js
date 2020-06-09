@@ -1,4 +1,3 @@
-import { createElement } from '@bikeshaving/crank';
 import { Link } from './Router';
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';

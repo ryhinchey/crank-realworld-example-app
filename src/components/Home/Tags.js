@@ -1,4 +1,3 @@
-import { createElement } from '@bikeshaving/crank';
 import api from '../../api';
 
 function Tag({tag}) {

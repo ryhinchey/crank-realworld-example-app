@@ -1,4 +1,4 @@
-import { createElement, Fragment } from '@bikeshaving/crank';
+import { Fragment } from '@bikeshaving/crank';
 import ArticlePreview from './ArticlePreview';
 import api from '../api';
 

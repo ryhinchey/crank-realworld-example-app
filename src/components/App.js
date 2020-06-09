@@ -1,4 +1,4 @@
-import {createElement, Fragment} from '@bikeshaving/crank';
+import { Fragment } from '@bikeshaving/crank';
 import { Router, Route, routeTo, RouteData } from './Router';
 import Header from './Header';
 import Home from './Home';
@@ -26,7 +26,7 @@ async function *App() {
     routeTo('/');
     this.refresh();
   }
- 
+
   this.addEventListener('login', handleAuthentication);
   this.addEventListener('register', handleAuthentication);
 

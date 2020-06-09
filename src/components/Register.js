@@ -1,4 +1,3 @@
-import { createElement } from '@bikeshaving/crank';
 import { Link, routeTo } from './Router';
 import ListErrors from './ListErrors';
 import api from '../api';
@@ -19,23 +18,23 @@ function* Register() {
 
   const submitForm = async e => {
     e.preventDefault();
-    
+
     inProgress = true;
     this.refresh();
 
     const { username, email, password } = formData;
     const authResponse = await api.Auth.register(username, email, password);
-   
+
     if (authResponse.errors) {
       errors = authResponse.errors;
       formData = { email: '', password: '', username: ''}
       inProgress = false;
       return this.refresh();
     }
-  
+
     this.dispatchEvent(new CustomEvent('register', { bubbles: true, detail: { authResponse } }))
   }
-  
+
   while (true) {
     yield (
       <div class="auth-page">

@@ -1,5 +1,5 @@
 
-import { createElement, Raw } from '@bikeshaving/crank';
+import { Raw } from '@bikeshaving/crank';
 import ArticleMeta from './ArticleMeta';
 import { RouteData } from '../Router';
 // import CommentContainer from './CommentContainer';

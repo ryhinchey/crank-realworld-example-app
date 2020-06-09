@@ -1,4 +1,3 @@
-import { createElement } from '@bikeshaving/crank';
 import { RouteData } from '../Router';
 import ArticleList from '../ArticleList';
 import Suspense from '../Suspense';
@@ -33,7 +32,7 @@ function YourFeedTab({currentUser, activeTab}) {
   if (currentUser) {
     return (
       <li class="nav-item">
-        <button class={ activeTab === 'feed' ? 'nav-link active' : 'nav-link' }>          
+        <button class={ activeTab === 'feed' ? 'nav-link active' : 'nav-link' }>
           Your Feed
         </button>
       </li>

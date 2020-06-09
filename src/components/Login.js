@@ -1,4 +1,3 @@
-import { createElement } from '@bikeshaving/crank';
 import { Link } from './Router';
 import ListErrors from './ListErrors';
 import api from '../api';
@@ -67,10 +66,10 @@ function* Login() {
 
   const onSubmit = async e => {
     e.preventDefault();
-    
+
     inProgress = true;
     this.refresh();
-    
+
     const authResponse = await api.Auth.login(formData.email, formData.password);
 
     if (authResponse.errors) {
@@ -86,11 +85,11 @@ function* Login() {
   while (true) {
     yield (
       <LoginForm
-        onSubmit={onSubmit} 
-        errors={errors} 
-        changeFormData={changeFormData} 
-        formData={formData} 
-        inProgress={inProgress} 
+        onSubmit={onSubmit}
+        errors={errors}
+        changeFormData={changeFormData}
+        formData={formData}
+        inProgress={inProgress}
       />
     );
   }

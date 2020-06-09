@@ -1,4 +1,3 @@
-import { createElement } from '@bikeshaving/crank';
 import { Link } from '../Router';
 import api from '../../api';
 

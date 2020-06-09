@@ -1,4 +1,3 @@
-import { createElement } from '@bikeshaving/crank';
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
 import { Link } from '../Router';
