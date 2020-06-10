@@ -1,5 +1,4 @@
-import { Fragment } from '@bikeshaving/crank';
-import { Router, Route, routeTo, RouteData } from './Router';
+import { Router, Route, routeTo } from './Router';
 import Header from './Header';
 import Home from './Home';
 import Article from './Article';

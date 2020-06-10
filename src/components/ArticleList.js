@@ -49,9 +49,23 @@ function withPagination(Component) {
   }
 }
 
-async function *ArticleList({page, setPage}) {
-  for await ({page, setPage} of this) {
-    const { articles, articlesCount} = await api.Articles.all(page);
+async function *ArticleList({articlesFor, page, setPage}) {
+  for await ({page, setPage, articlesFor} of this) {
+    let getArticlesPromise;
+
+    switch(articlesFor) {
+      case 'all':
+       getArticlesPromise = api.Articles.all(page);
+       break;
+      case 'feed':
+        getArticlesPromise = api.Articles.feed(page);
+        break;
+      default:
+       getArticlesPromise = api.Articles.byTag(articlesFor, page);
+       break;
+    }
+
+    const { articles, articlesCount} = await getArticlesPromise;
 
     if (articles.length === 0) {
       yield (
@@ -59,16 +73,16 @@ async function *ArticleList({page, setPage}) {
           No articles are here... yet.
         </div>
       );
+    } else {
+      yield (
+        <Fragment>
+          {articles.map(article => (
+            <ArticlePreview article={article} key={article.slug} />
+          ))}
+          <ListPagination setPage={setPage} currentPage={page} articlesCount={articlesCount} />
+        </Fragment>
+      )
     }
-
-    yield (
-      <Fragment>
-        {articles.map(article => (
-          <ArticlePreview article={article} key={article.slug} />
-        ))}
-        <ListPagination setPage={setPage} currentPage={page} articlesCount={articlesCount} />
-      </Fragment>
-    )
   }
 }
 
